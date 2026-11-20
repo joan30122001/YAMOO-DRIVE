@@ -93,7 +93,7 @@ export default function Header() {
     >
       <div className="mx-auto flex h-20 max-w-[1900px] items-center justify-between gap-x-3 px-4 sm:gap-x-6 md:grid md:h-24 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-[4.9vw]">
         <Link to="/" aria-label={`${agencyConfig.name}, accueil`} className="inline-flex min-h-11 shrink-0 items-center md:order-2 md:justify-self-center">
-          <Wordmark />
+          <Wordmark intro />
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden md:order-1 md:block">

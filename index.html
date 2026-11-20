@@ -9,6 +9,12 @@
     <!-- Démonstration non approuvée par l'agence : à retirer en même temps que `noindex` dans agency.config.js (un test les relie). -->
     <meta name="robots" content="noindex, nofollow" />
     <title>YAMOO DRIVE — Location de véhicules</title>
+    <!-- Entrée du logo (story 9.1) : jouée à chaque chargement complet de la page (ouverture, actualisation), jamais lors d'un
+         changement de page dans le site. Le script ne fait que poser un attribut ; sans lui (JavaScript désactivé), le logo
+         reste simplement visible. -->
+    <script>
+      document.documentElement.setAttribute('data-logo-intro', '')
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -107,6 +107,61 @@
     html {
       scroll-behavior: smooth;
     }
+
+    /* Entrée du logo de l'en-tête (story 9.1) : jouée une fois par session, quand index.html pose data-logo-intro.
+       `backwards` : l'état de départ est appliqué dès le premier affichage (pas de scintillement) et l'animation ne retient
+       pas son état final, pour que l'échelle du survol (story 9.3) puisse s'appliquer ensuite. */
+    html[data-logo-intro] .logo-intro {
+      animation: logo-intro 1.2s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+
+    /* Mise en avant au survol du logo (story 9.3) : +3 % d'échelle et un peu plus de lumière, en 0,25 s. Par `transform` :
+       la mise en page autour ne bouge pas. Le reflet (9.2) est dans le même élément et suit l'échelle. */
+    .logo-shine {
+      transition:
+        transform 0.25s ease-out,
+        filter 0.25s ease-out;
+    }
+    a:hover .logo-shine,
+    a:focus-visible .logo-shine {
+      transform: scale(1.03);
+      filter: brightness(1.12);
+    }
+
+    /* Reflet au survol du logo (story 9.2) : une bande de lumière traverse le logo en 0,8 s. Le masque reprend l'alpha de
+       logo.png : la lumière n'apparaît que sur les parties opaques du logo, dont le fichier n'est pas modifié. */
+    .logo-shine::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(
+        110deg,
+        transparent 40%,
+        color-mix(in srgb, var(--color-ivory) 85%, transparent) 50%,
+        transparent 60%
+      );
+      background-size: 250% 100%;
+      background-position: 150% 0;
+      background-repeat: no-repeat;
+      -webkit-mask: url('/images/logo.png') center / 100% 100% no-repeat;
+      mask: url('/images/logo.png') center / 100% 100% no-repeat;
+    }
+    /* Au chargement : le logo de l'en-tête joue un reflet, une fois, juste après son entrée (:where garde une spécificité
+       faible pour que le survol, ci-dessous, puisse le rejouer avec une animation de nom différent). */
+    :where(html[data-logo-intro]) .logo-intro.logo-shine::after {
+      animation: logo-shine 0.8s ease-in-out 1.2s both;
+    }
+    a:hover .logo-shine::after,
+    a:focus-visible .logo-shine::after {
+      animation: logo-shine-hover 0.8s ease-in-out both;
+    }
+    /* Tactile : pas de survol ; le reflet se joue une seule fois, après l'entrée du logo. */
+    @media (hover: none) {
+      .logo-shine::after {
+        animation: logo-shine 0.8s ease-in-out 1.4s both;
+      }
+    }
   }
 
   :focus-visible {
@@ -152,5 +207,34 @@ button[role='combobox']:not([aria-invalid='true']):focus-visible {
     pointer-events: none;
     opacity: 0.045;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes logo-intro {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes logo-shine {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+@keyframes logo-shine-hover {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
   }
 }

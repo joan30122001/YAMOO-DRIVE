@@ -19,6 +19,18 @@ describe('Wordmark', () => {
     expect(img.getAttribute('alt')).toBe(agencyConfig.name)
   })
 
+  it('ne joue l’entrée en douceur que sur demande (story 9.1) : le logo du pied de page reste fixe', () => {
+    expect(render(<Wordmark />).container.firstChild.className).not.toContain('logo-intro')
+    cleanup()
+    expect(render(<Wordmark intro />).container.firstChild.className).toContain('logo-intro')
+  })
+
+  it('porte la classe du reflet (story 9.2), décorative : le nom accessible ne change pas', () => {
+    const { container } = render(<Wordmark />)
+    expect(container.firstChild.className).toContain('logo-shine')
+    expect(container.querySelector('img').getAttribute('alt')).toBe(agencyConfig.name)
+  })
+
   it('réserve les dimensions du logo (pas de saut de mise en page)', () => {
     const img = render(<Wordmark />).container.querySelector('img')
     expect(img.getAttribute('width')).toBe('616')

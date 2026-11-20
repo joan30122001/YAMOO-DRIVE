@@ -1,5 +1,6 @@
 // @vitest-environment happy-dom
-import { afterEach, describe, expect, it } from 'vitest'
+import { act } from 'react'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import AboutBand from './AboutBand.jsx'
@@ -7,7 +8,7 @@ import CardRail from './CardRail.jsx'
 import Cities from './Cities.jsx'
 import Faq from './Faq.jsx'
 import FeaturePanel from './FeaturePanel.jsx'
-import HeroCarousel from './HeroCarousel.jsx'
+import HeroCarousel, { AUTOPLAY_MS } from './HeroCarousel.jsx'
 import Intro from './Intro.jsx'
 import agencyConfig from '../../data/agency.config.js'
 import copy from '../../data/copy.js'
@@ -26,7 +27,7 @@ describe('HeroCarousel', () => {
 
   it('affiche un compteur « n / total », avance, puis boucle', () => {
     inRouter(<HeroCarousel />)
-    const counter = () => document.querySelector('[aria-live="polite"]').textContent.replace(/\s+/g, ' ').trim()
+    const counter = () => document.querySelector('[data-carousel-counter]').textContent.replace(/\s+/g, ' ').trim()
     expect(counter()).toMatch(/^1 \/ \d+$/)
     const total = Number(counter().split('/')[1])
     for (let i = 0; i < total; i++) fireEvent.click(screen.getByRole('button', { name: 'Diapositive suivante' }))
@@ -45,7 +46,7 @@ describe('HeroCarousel', () => {
 
   it('compte 5 diapositives : l’accueil puis 4 véhicules du catalogue, chacune menant à sa fiche', () => {
     inRouter(<HeroCarousel />)
-    const counter = () => document.querySelector('[aria-live="polite"]').textContent.replace(/\s+/g, ' ').trim()
+    const counter = () => document.querySelector('[data-carousel-counter]').textContent.replace(/\s+/g, ' ').trim()
     expect(counter()).toBe('1 / 5')
     const seen = []
     for (let i = 1; i < 5; i++) {
@@ -57,6 +58,114 @@ describe('HeroCarousel', () => {
       seen.push(href)
     }
     expect(new Set(seen).size).toBe(4)
+  })
+})
+
+describe('HeroCarousel : défilement automatique', () => {
+  const counter = () => document.querySelector('[data-carousel-counter]').textContent.replace(/\s+/g, ' ').trim()
+  const tick = (ms) => act(() => vi.advanceTimersByTime(ms))
+
+  afterEach(() => {
+    vi.useRealTimers()
+    vi.restoreAllMocks()
+  })
+
+  it('change de diapositive seul, puis boucle', () => {
+    vi.useFakeTimers()
+    inRouter(<HeroCarousel />)
+    expect(counter()).toBe('1 / 5')
+    tick(AUTOPLAY_MS)
+    expect(counter()).toBe('2 / 5')
+    // Un délai à la fois : le suivant n'est planifié qu'après le rendu de la diapositive.
+    for (let i = 0; i < 4; i++) tick(AUTOPLAY_MS)
+    expect(counter()).toBe('1 / 5')
+  })
+
+  it('un geste manuel relance le délai complet', () => {
+    vi.useFakeTimers()
+    inRouter(<HeroCarousel />)
+    tick(AUTOPLAY_MS - 500)
+    fireEvent.click(screen.getByRole('button', { name: 'Diapositive suivante' }))
+    expect(counter()).toBe('2 / 5')
+    tick(AUTOPLAY_MS - 500)
+    expect(counter()).toBe('2 / 5')
+    tick(500)
+    expect(counter()).toBe('3 / 5')
+  })
+
+  it('s’arrête au survol et reprend à la sortie', () => {
+    vi.useFakeTimers()
+    inRouter(<HeroCarousel />)
+    const section = screen.getByRole('region', { name: 'Présentation' })
+    fireEvent.mouseEnter(section)
+    tick(AUTOPLAY_MS * 3)
+    expect(counter()).toBe('1 / 5')
+    fireEvent.mouseLeave(section)
+    tick(AUTOPLAY_MS)
+    expect(counter()).toBe('2 / 5')
+  })
+
+  // happy-dom ne distingue pas le focus clavier du focus souris : on simule le résultat de `:focus-visible`.
+  const withFocusVisible = (value) => {
+    const original = Element.prototype.matches
+    vi.spyOn(Element.prototype, 'matches').mockImplementation(function matches(selector) {
+      return selector === ':focus-visible' ? value : original.call(this, selector)
+    })
+  }
+
+  it('s’arrête quand le focus clavier est dans le carrousel, et reprend à sa sortie', () => {
+    vi.useFakeTimers()
+    withFocusVisible(true)
+    inRouter(<HeroCarousel />)
+    const next = screen.getByRole('button', { name: 'Diapositive suivante' })
+    fireEvent.focus(next)
+    tick(AUTOPLAY_MS * 3)
+    expect(counter()).toBe('1 / 5')
+    fireEvent.blur(next, { relatedTarget: document.body })
+    tick(AUTOPLAY_MS)
+    expect(counter()).toBe('2 / 5')
+  })
+
+  it('un clic de souris (focus non clavier) n’arrête pas le défilement', () => {
+    vi.useFakeTimers()
+    withFocusVisible(false)
+    inRouter(<HeroCarousel />)
+    fireEvent.focus(screen.getByRole('button', { name: 'Diapositive suivante' }))
+    tick(AUTOPLAY_MS)
+    expect(counter()).toBe('2 / 5')
+  })
+
+  it('le bouton pause arrête le défilement et le bouton lecture le reprend', () => {
+    vi.useFakeTimers()
+    inRouter(<HeroCarousel />)
+    fireEvent.click(screen.getByRole('button', { name: 'Mettre en pause le défilement automatique' }))
+    tick(AUTOPLAY_MS * 3)
+    expect(counter()).toBe('1 / 5')
+    fireEvent.click(screen.getByRole('button', { name: 'Reprendre le défilement automatique' }))
+    tick(AUTOPLAY_MS)
+    expect(counter()).toBe('2 / 5')
+  })
+
+  it('n’annonce le compteur aux lecteurs d’écran que lorsque le défilement est arrêté', () => {
+    inRouter(<HeroCarousel />)
+    const el = () => document.querySelector('[data-carousel-counter]')
+    expect(el().getAttribute('aria-live')).toBe('off')
+    fireEvent.click(screen.getByRole('button', { name: 'Mettre en pause le défilement automatique' }))
+    expect(el().getAttribute('aria-live')).toBe('polite')
+  })
+
+  it('ne défile pas seul quand l’utilisateur demande moins de mouvement, et n’affiche pas de bouton pause', () => {
+    vi.useFakeTimers()
+    const original = window.matchMedia
+    window.matchMedia = (query) => ({ matches: query.includes('reduce'), media: query, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} })
+    try {
+      inRouter(<HeroCarousel />)
+      tick(AUTOPLAY_MS * 3)
+      expect(counter()).toBe('1 / 5')
+      expect(screen.queryByRole('button', { name: /défilement automatique/ })).toBeNull()
+    } finally {
+      window.matchMedia = original
+    }
   })
 })
 

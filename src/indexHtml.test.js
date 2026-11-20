@@ -82,5 +82,51 @@ describe('index.html', () => {
     expect(themeColor('gold')).toMatch(/^#[0-9a-f]{6}$/)
     expect(themeColor('obsidian')).toMatch(/^#[0-9a-f]{6}$/)
   })
-})
 
+  describe('entrée du logo (story 9.1)', () => {
+    const script = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? ''
+
+    function run() {
+      const attrs = new Set()
+      const doc = { documentElement: { setAttribute: (name) => attrs.add(name) } }
+      new Function('document', script)(doc)
+      return attrs
+    }
+
+    it('pose data-logo-intro à chaque chargement de la page (ouverture et actualisation)', () => {
+      expect(run().has('data-logo-intro')).toBe(true)
+      expect(run().has('data-logo-intro')).toBe(true)
+    })
+
+    it('n’utilise aucun stockage (rien à bloquer, rien à retenir)', () => {
+      expect(script).not.toMatch(/Storage|cookie/)
+    })
+
+    it('l’animation n’existe que si l’utilisateur n’a pas demandé moins de mouvement', () => {
+      const block = theme.match(/@media \(prefers-reduced-motion: no-preference\) \{[\s\S]*?\n {2}\}/)?.[0] ?? ''
+      expect(block).toContain('html[data-logo-intro] .logo-intro')
+      expect(theme).toMatch(/@keyframes logo-intro/)
+    })
+
+    it('la mise en avant (story 9.3) passe par transform, ne reste pas écrasée par l’entrée, et se joue sans mouvement réduit', () => {
+      const block = theme.match(/@media \(prefers-reduced-motion: no-preference\) \{[\s\S]*?\n {2}\}\r?\n\r?\n {2}:focus-visible/)?.[0] ?? ''
+      expect(block).toMatch(/a:hover \.logo-shine,\s+a:focus-visible \.logo-shine \{\s+transform: scale\(1\.03\);\s+filter: brightness\(1\.12\);/)
+      expect(block).toMatch(/\.logo-shine \{\s+transition:\s+transform 0\.25s/)
+      // `both` retiendrait le transform final de l'entrée et empêcherait l'échelle du survol.
+      expect(block).toMatch(/logo-intro 1\.2s [^;]* backwards;/)
+    })
+
+    it('le reflet (story 9.2) est masqué par le logo, joué au survol et au focus, et seulement sans demande de moins de mouvement', () => {
+      const block = theme.match(/@media \(prefers-reduced-motion: no-preference\) \{[\s\S]*?\n {2}\}\r?\n\r?\n {2}:focus-visible/)?.[0] ?? ''
+      expect(block).toContain('.logo-shine::after')
+      expect(block).toContain('/images/logo.png')
+      expect(block).toContain('a:hover .logo-shine::after')
+      expect(block).toContain('a:focus-visible .logo-shine::after')
+      expect(block).toContain('(hover: none)')
+      // Reflet au chargement (en-tête) : rejoué par le survol grâce à un nom d'animation différent.
+      expect(block).toContain(':where(html[data-logo-intro]) .logo-intro.logo-shine::after')
+      expect(theme).toMatch(/@keyframes logo-shine-hover/)
+      expect(theme).toMatch(/@keyframes logo-shine/)
+    })
+  })
+})

@@ -8,14 +8,15 @@ const LOGO_HEIGHT = 191
  * Logo de l'agence, posé directement sur le fond noir, sans contour ni pastille. Ses couleurs sont celles du logo
  * d'origine, strictement intactes (bleu marine et or) ; seul le fond blanc a été retiré
  * (voir public/vehicles/LICENSES.md).
+ * `intro` : joue l'entrée en douceur (story 9.1), une fois par session ; seul le logo de l'en-tête l'utilise.
  * Le lien qui l'entoure porte le nom accessible (« YAMOO DRIVE, accueil ») ; seul, l'`alt` nomme l'image.
  */
-export default function Wordmark({ name = agencyConfig.name, className = '' }) {
+export default function Wordmark({ name = agencyConfig.name, className = '', intro = false }) {
   const text = typeof name === 'string' ? name.trim() : ''
   if (!text) return null
 
   return (
-    <span className={`inline-flex items-center ${className}`}>
+    <span className={`relative inline-flex items-center logo-shine ${intro ? 'logo-intro' : ''} ${className}`}>
       <img src="/images/logo.png" alt={text} width={LOGO_WIDTH} height={LOGO_HEIGHT} decoding="async" className="h-9 w-auto min-[400px]:h-11 md:h-12" />
     </span>
   )
