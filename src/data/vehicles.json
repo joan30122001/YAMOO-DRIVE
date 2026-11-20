@@ -1,0 +1,334 @@
+[
+  {
+    "slug": "jetour-x90-plus",
+    "brand": "Jetour",
+    "model": "X90 Plus",
+    "category": "SUV / 4x4",
+    "seats": 7,
+    "transmission": "Automatique",
+    "dailyRateXAF": 100000,
+    "driverSupplementXAF": 25000,
+    "services": {
+      "selfDrive": true,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Essence",
+      "Puissance": "197 à 284 ch",
+      "Places": "5 ou 7 selon la version"
+    },
+    "equipment": [
+      "Audio Sony 8 haut-parleurs",
+      "Caméra panoramique 360°",
+      "Sièges avant chauffants",
+      "Régulateur de vitesse adaptatif",
+      "Recharge sans fil pour téléphone",
+      "Détection des angles morts"
+    ],
+    "images": {
+      "main": "/vehicles/jetour-x90-plus.webp",
+      "gallery": [
+        "/vehicles/jetour-x90-plus-lg.webp",
+        "/vehicles/jetour-x90-plus-2.webp",
+        "/vehicles/jetour-x90-plus-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": true
+  },
+  {
+    "slug": "jetour-dashing",
+    "brand": "Jetour",
+    "model": "Dashing",
+    "category": "SUV / 4x4",
+    "seats": 5,
+    "transmission": "Automatique",
+    "dailyRateXAF": 80000,
+    "driverSupplementXAF": 25000,
+    "services": {
+      "selfDrive": true,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Essence",
+      "Puissance": "115 à 145 kW"
+    },
+    "equipment": [
+      "Écran central de 15,6 pouces",
+      "Charge sans fil 40 W",
+      "Audio Sony 8 haut-parleurs",
+      "Aide au stationnement à 540°",
+      "Clé intelligente",
+      "Sièges en daim"
+    ],
+    "images": {
+      "main": "/vehicles/jetour-dashing.webp",
+      "gallery": [
+        "/vehicles/jetour-dashing-lg.webp",
+        "/vehicles/jetour-dashing-2.webp",
+        "/vehicles/jetour-dashing-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": true
+  },
+  {
+    "slug": "jetour-t1",
+    "brand": "Jetour",
+    "model": "T1",
+    "category": "SUV / 4x4",
+    "seats": 5,
+    "transmission": "Automatique",
+    "dailyRateXAF": 90000,
+    "driverSupplementXAF": 25000,
+    "services": {
+      "selfDrive": true,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Essence",
+      "Puissance": "135 à 187 kW",
+      "Coffre": "574 L"
+    },
+    "equipment": [
+      "Transmission intégrale intelligente XWD",
+      "Écran tactile de 15,6 pouces",
+      "Caméra panoramique 360°",
+      "Toit ouvrant",
+      "Hayon électrique",
+      "Sièges avant chauffants"
+    ],
+    "images": {
+      "main": "/vehicles/jetour-t1.webp",
+      "gallery": [
+        "/vehicles/jetour-t1-lg.webp",
+        "/vehicles/jetour-t1-2.webp",
+        "/vehicles/jetour-t1-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": true
+  },
+  {
+    "slug": "jetour-t2",
+    "brand": "Jetour",
+    "model": "T2",
+    "category": "SUV / 4x4",
+    "seats": 5,
+    "transmission": "Automatique",
+    "dailyRateXAF": 85000,
+    "driverSupplementXAF": 25000,
+    "services": {
+      "selfDrive": true,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Essence",
+      "Puissance": "135 kW"
+    },
+    "equipment": [
+      "Transmission intégrale XWD",
+      "Écran central de 15,6 pouces",
+      "Apple CarPlay",
+      "Caméra panoramique 360°",
+      "Toit ouvrant",
+      "Sièges avant chauffants"
+    ],
+    "images": {
+      "main": "/vehicles/jetour-t2.webp",
+      "gallery": [
+        "/vehicles/jetour-t2-lg.webp",
+        "/vehicles/jetour-t2-2.webp",
+        "/vehicles/jetour-t2-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": false
+  },
+  {
+    "slug": "jetour-x70-plus",
+    "brand": "Jetour",
+    "model": "X70 Plus",
+    "category": "SUV / 4x4",
+    "seats": 7,
+    "transmission": "Automatique",
+    "dailyRateXAF": 85000,
+    "driverSupplementXAF": 25000,
+    "services": {
+      "selfDrive": true,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Essence",
+      "Puissance": "210 ch",
+      "Places": "5 ou 7 selon la version"
+    },
+    "equipment": [
+      "Audio Sony 8 haut-parleurs",
+      "Parking panoramique 360°",
+      "Toit ouvrant panoramique",
+      "Régulateur de vitesse adaptatif",
+      "Recharge sans fil pour téléphone",
+      "Sièges avant chauffants"
+    ],
+    "images": {
+      "main": "/vehicles/jetour-x70-plus.webp",
+      "gallery": [
+        "/vehicles/jetour-x70-plus-lg.webp",
+        "/vehicles/jetour-x70-plus-2.webp",
+        "/vehicles/jetour-x70-plus-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": false
+  },
+  {
+    "slug": "jetour-x50",
+    "brand": "Jetour",
+    "model": "X50",
+    "category": "SUV / 4x4",
+    "seats": 5,
+    "transmission": "Automatique",
+    "dailyRateXAF": 60000,
+    "driverSupplementXAF": 25000,
+    "services": {
+      "selfDrive": true,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Essence",
+      "Puissance": "115 kW",
+      "Coffre": "398 L"
+    },
+    "equipment": [
+      "Sièges en cuir",
+      "Écran multimédia avec Apple CarPlay et Android Auto",
+      "Caméra panoramique 360°",
+      "Toit ouvrant",
+      "Chargeur sans fil",
+      "Surveillance des angles morts"
+    ],
+    "images": {
+      "main": "/vehicles/jetour-x50.webp",
+      "gallery": [
+        "/vehicles/jetour-x50-lg.webp",
+        "/vehicles/jetour-x50-2.webp",
+        "/vehicles/jetour-x50-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": false
+  },
+  {
+    "slug": "jmc-grand-avenue",
+    "brand": "JMC",
+    "model": "Grand Avenue",
+    "category": "Pick-up",
+    "seats": 5,
+    "transmission": "Automatique",
+    "dailyRateXAF": 110000,
+    "driverSupplementXAF": 0,
+    "services": {
+      "selfDrive": false,
+      "withDriver": true
+    },
+    "specs": {
+      "Carburant": "Diesel ou essence",
+      "Puissance": "130 kW (diesel) ou 180 kW (essence)"
+    },
+    "equipment": [
+      "Transmission 4x4",
+      "Capacité de remorquage de 3,5 tonnes",
+      "Écran de 10 pouces",
+      "Radars et caméra de recul",
+      "Entrée sans clé",
+      "Hayon à ouverture assistée"
+    ],
+    "images": {
+      "main": "/vehicles/jmc-grand-avenue.webp",
+      "gallery": [
+        "/vehicles/jmc-grand-avenue-lg.webp",
+        "/vehicles/jmc-grand-avenue-2.webp",
+        "/vehicles/jmc-grand-avenue-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": false
+  },
+  {
+    "slug": "jmc-vigus",
+    "brand": "JMC",
+    "model": "Vigus",
+    "category": "Pick-up",
+    "seats": 5,
+    "transmission": "Manuelle",
+    "dailyRateXAF": 90000,
+    "driverSupplementXAF": 0,
+    "services": {
+      "selfDrive": true,
+      "withDriver": false
+    },
+    "specs": {
+      "Carburant": "Diesel",
+      "Puissance": "96 à 103 kW"
+    },
+    "equipment": [
+      "Écran tactile de 10 pouces",
+      "Apple CarPlay et Android Auto",
+      "Climatisation",
+      "Bluetooth",
+      "ABS et ESP",
+      "Aide au démarrage en côte"
+    ],
+    "images": {
+      "main": "/vehicles/jmc-vigus.webp",
+      "gallery": [
+        "/vehicles/jmc-vigus-lg.webp",
+        "/vehicles/jmc-vigus-2.webp",
+        "/vehicles/jmc-vigus-3.webp"
+      ]
+    },
+    "conditions": [
+      "Permis de conduire valide exigé pour la location sans chauffeur.",
+      "Une caution est demandée à la remise du véhicule ; son montant est précisé par l'agence.",
+      "Le kilométrage et le carburant sont précisés par l'agence au moment de la demande."
+    ],
+    "isDemo": true,
+    "featured": false
+  }
+]

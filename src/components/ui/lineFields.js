@@ -1,0 +1,5 @@
+// Champs de formulaire « à simple filet » : fond transparent, seul un trait fin en dessous. Se pose en className sur
+// le conteneur du formulaire ; les variantes arbitraires l'emportent sur les classes du composant Field.
+// Les cases et boutons radio gardent leur apparence native.
+export const LINE_FIELDS =
+  '[&_input:not([type=radio]):not([type=checkbox])]:rounded-none [&_input:not([type=radio]):not([type=checkbox])]:border-0 [&_input:not([type=radio]):not([type=checkbox])]:border-b [&_input:not([type=radio]):not([type=checkbox])]:border-ivory/40 [&_input:not([type=radio]):not([type=checkbox])]:bg-transparent [&_select]:rounded-none [&_select]:border-0 [&_select]:border-b [&_select]:border-ivory/40 [&_select]:bg-transparent [&_select]:text-ivory [&_textarea]:rounded-none [&_textarea]:border-0 [&_textarea]:border-b [&_textarea]:border-ivory/40 [&_textarea]:bg-transparent [&_label]:text-[0.6875rem] [&_label]:tracking-[0.1em] [&_label]:text-ivory/70 [&_button[role=combobox]]:rounded-none [&_button[role=combobox]]:border-0 [&_button[role=combobox]]:border-b [&_button[role=combobox]]:border-ivory/40 [&_button[role=combobox]]:bg-transparent'

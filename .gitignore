@@ -1,0 +1,13 @@
+node_modules
+dist
+visual-check
+*.log
+.vercel
+.env*
+
+# --- BMAD et Claude (au cas où le dépôt est à ce niveau) ---
+_bmad/
+_bmad-output/
+.claude/
+CLAUDE.md
+CLAUDE.local.md

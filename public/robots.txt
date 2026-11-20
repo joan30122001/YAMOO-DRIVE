@@ -1,0 +1,6 @@
+# Démonstration indépendante : indexation interdite tant que `noindex: true` est actif dans src/data/agency.config.js.
+# Fichier généré par scripts/generate-seo.mjs : ne pas le modifier à la main.
+User-agent: *
+Disallow: /
+
+Sitemap: https://yamoo-drive.example/sitemap.xml
